@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wimple</title>
+  <link rel="stylesheet" href="style.css">
+</head>  
+<body>
+  <div class="fontcontainer">
+    <div class="columns-2 w-row">
+ 
+        <textarea class="textinput w-input" name="field" data-name="Field" placeholder="מוזמנים.ות לנסות כאן!" id="field" required=""></textarea>
+        <textarea class="textinput w-input shadowinput" id="shadowfield"></textarea>
+      </div>
+      <div class="w-col w-col-1">
+        <div class="slider-column">
+          <div class="slider-container">
+            <div class="slider-track">
+              <div class="slider-thumb"></div>
+            </div>
+          
+        </div>
+      </div>
+      <div class="w-col w-col-2">
+        <div class="buttonscontainer">
+          <a href="#" class="button button-light w-button">מ</a>
+          <div class="w-layout-vflex newline"></div>
+          <a href="#" class="button button-reg w-button">מ</a>
+          <div class="w-layout-vflex newline"></div>
+          <a href="#" class="button button-bold w-button">מ</a>
+          <div class="w-layout-vflex newline"></div>
+          <a href="#" class="button button-heavy w-button">מ</a>
+          <div class="w-layout-vflex newline"></div>
+          <a href="#" class="button button-stencil w-button">מ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="decocontainer">
+    <a href="#" class="button">1</a>
+    <a href="#" class="button">2</a>
+    <a href="#" class="button">3</a>
+    <a href="#" class="button">4</a>
+    <a href="#" class="button">5</a>
+  </div>
+
+
+  <script>
+    // Get references to the buttons, text input, slider track, and slider thumb
+    const buttons = document.querySelectorAll('.buttonscontainer .button');
+    const decoButtons = document.querySelectorAll('.decocontainer .button');
+    const textInput = document.querySelector('.textinput');
+    const shadowInput = document.querySelector('.shadowinput');
+    const sliderTrack = document.querySelector('.slider-track');
+    const sliderThumb = document.querySelector('.slider-thumb');
+
+    // Add click event listeners to the buttons
+    buttons.forEach((button, index) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        changeFont(index);
+      });
+    });
+
+    decoButtons.forEach((button, index) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        changeDeco(index);
+      });
+    });
+
+
+    // Define the font names corresponding to each button
+    const fontNames = [
+      'wimple-light',
+      'wimple-regular',
+      'wimple-bold',
+      'wimple-heavy',
+      'wimple-stencil'
+    ];
+
+    const decoNames = [
+      'wimple-deco-001',
+      'wimple-deco-002',
+      'wimple-deco-003',
+      'wimple-deco-004',
+      'wimple-deco-005'
+    ];
+
+    // Function to change the font of the text input
+    function changeFont(index) {
+      document.body.className = fontNames[ index ];
+      // textInput.style.fontFamily = fontNames[index];
+      
+      // Remove the 'active' class from all buttons
+      buttons.forEach(button => {
+        button.classList.remove('active');
+      });
+      
+      // Add the 'active' class to the clicked button
+      buttons[index].classList.add('active');
+    }
+
+    function changeDeco(index) {
+      document.querySelector( ".fontcontainer" ).className = "fontcontainer " + decoNames[ index ];
+      // textInput.style.fontFamily = fontNames[index];
+      
+      // Remove the 'active' class from all buttons
+      decoButtons.forEach(button => {
+        button.classList.remove('active');
+      });
+      
+      // Add the 'active' class to the clicked button
+      decoButtons[index].classList.add('active');
+    }
+
+    // Vertical Slider functionality
+    let isDragging = false;
+    let startPosY = 0;
+    let thumbStartPos = 0;
+    
+    sliderThumb.addEventListener('mousedown', startDrag);
+    sliderThumb.addEventListener('touchstart', startDrag);
+    
+    function startDrag(event) {
+      event.preventDefault();
+      
+      isDragging = true;
+      
+      if (event.type === 'mousedown') {
+        startPosY = event.clientY;
+      } else if (event.type === 'touchstart') {
+        startPosY = event.touches[0].clientY;
+      }
+      
+      thumbStartPos = parseInt(getComputedStyle(sliderThumb).top, 10);
+      
+      document.addEventListener('mousemove', handleDrag);
+      document.addEventListener('touchmove', handleDrag);
+      document.addEventListener('mouseup', stopDrag);
+      document.addEventListener('touchend', stopDrag);
+    }
+    
+    function handleDrag(event) {
+      if (!isDragging) return;
+      
+      let currentPosY = 0;
+      
+      if (event.type === 'mousemove') {
+        currentPosY = event.clientY;
+      } else if (event.type === 'touchmove') {
+        currentPosY = event.touches[0].clientY;
+      }
+      
+      const delta = currentPosY - startPosY;
+      const newPos = thumbStartPos + delta;
+      
+      const minPos = 0;
+      const maxPos = sliderTrack.clientHeight - sliderThumb.clientHeight;
+      
+      const clampedPos = Math.min(Math.max(newPos, minPos), maxPos);
+      
+      sliderThumb.style.top = clampedPos + 'px';
+      
+      const value = mapRange(clampedPos, minPos, maxPos, 400, 40);
+      textInput.style.fontSize = value + 'px';
+      shadowInput.style.fontSize = value + 'px';
+    }
+    
+    function stopDrag() {
+      isDragging = false;
+      
+      document.removeEventListener('mousemove', handleDrag);
+      document.removeEventListener('touchmove', handleDrag);
+      document.removeEventListener('mouseup', stopDrag);
+      document.removeEventListener('touchend', stopDrag);
+    }
+    
+    // Helper function to map a value from one range to another
+    function mapRange(value, inMin, inMax, outMin, outMax) {
+      return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+    }
+    const shadowfield = document.getElementById( "shadowfield" );
+    document.getElementById( "field" ).addEventListener( "input", e => {
+      shadowfield.value = e.currentTarget.value;
+    } );
+  </script>
+</body>
+</html>
