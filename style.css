@@ -484,7 +484,7 @@ body.wimple-stencil .fontcontainer.wimple-frame .textinput.shadowinput {
   line-height: 0;
   font-size: 8vh;
   bottom: 3px; 
-  border: none;
+  border: none; !important
 
   margin-left: 10px ;
  
