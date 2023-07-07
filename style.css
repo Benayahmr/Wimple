@@ -51,7 +51,7 @@ font-family: sans-serif;
 }
 
 body {
-margin: 0;
+margin: 20px;
 }
 
 
@@ -182,25 +182,28 @@ margin-right: 0;
 }
 
 .w-col {
+
 float: left;
 width: 100%;
 min-height: 1px;
 padding-left: 10px;
 padding-right: 10px;
 position: relative;
+
 }
 
 .w-col .w-col {
+  
 padding-left: 0;
 padding-right: 0;
 }
 
 .w-col-1 {
-width: 8.33333%;
+width: 9%;
 }
 
 .w-col-2 {
-width: 16.6667%;
+width: 15%;
 }
 
 @media screen and (max-width: 767px) {
@@ -239,11 +242,11 @@ padding: .2em .5em;
 }
 
 .w-slider-nav.w-shadow > div {
-box-shadow: 0 0 3px rgba(51, 51, 51, .4);
+box-shadow: 0 0 3px rgba(51, 51, 51, 1);
 }
 
 .w-slider-nav-invert > div {
-background-color: rgba(34, 34, 34, .4);
+background-color: rgba(34, 34, 34, 1);
 }
 
 .w-richtext .w-richtext-figure-selected.w-richtext-figure-type-video div:after, .w-richtext .w-richtext-figure-selected[data-rt-type="video"] div:after, .w-richtext .w-richtext-figure-selected.w-richtext-figure-type-image div, .w-richtext .w-richtext-figure-selected[data-rt-type="image"] div {
@@ -302,22 +305,18 @@ margin-top: 50px;
 display: block;
 }
 
+
 .buttonscontainer {
-height: 80vh;
-text-align: center;
-cursor: auto;
-object-fit: none;
-flex-wrap: wrap;
-flex: 0 auto;
-justify-content: space-around;
-align-self: stretch;
-align-items: stretch;
-display: flex;
-position: static;
-overflow: visible;
+  flex-direction:column;
+  padding-bottom: 9%;
+  padding-top: 10%;
+  vertical-align: middle;
+  right: 10px;
 }
 
+
 .textinput {
+  
   display: block;
   margin: 50px auto;
 width: calc( 100% - 300px );
@@ -328,7 +327,7 @@ cursor: text;
 border: 1px solid rgba(0, 0, 0, 0);
 padding: 5px;
 font-family: Wimple REGULAR, sans-serif;
-font-size: 50px;
+font-size: 150px;
 }
 
 body.wimple-light .textinput {
@@ -358,6 +357,10 @@ body.wimple-stencil .textinput {
   pointer-events: none;
 }
 
+
+
+
+
 body.wimple-light .textinput.shadowinput,
 body.wimple-regular .textinput.shadowinput,
 body.wimple-bold .textinput.shadowinput,
@@ -367,7 +370,7 @@ body.wimple-heavy .textinput.shadowinput {
 
 body.wimple-stencil .textinput.shadowinput {
   font-family: "Wimple STENCIL DECO 001";
-  color: red;
+  color:#1b7262;
   mix-blend-mode: multiply;
 }
 
@@ -391,12 +394,100 @@ body.wimple-stencil .fontcontainer.wimple-deco-005 .textinput.shadowinput {
   font-family: "Wimple STENCIL DECO 005";
 }
 
+body.wimple-stencil .fontcontainer.wimple-frame .textinput.shadowinput {
+  font-family: "Wimple STENCIL DECO FRAME";
+}
+
+
 .decocontainer {
   position: fixed;
-  bottom: 0;
+  bottom: 5%;
   left: 0; right: 0;
   text-align: center;
   display: none;
+  
+}
+
+
+
+
+
+#deco-1{
+  font-size:300px;
+  font-family: "Wimple STENCIL DECO 001";
+  text-decoration: none;
+
+  color:#ec694d;
+
+}
+#deco-2{
+  font-size:300px;
+  font-family: "Wimple STENCIL DECO 002";
+  text-decoration: none;
+  bottom: -70px;
+  color:#ec694d;
+
+  
+  
+}
+#deco-3{
+  font-size:300px;
+  font-family: "Wimple STENCIL DECO 003";
+  text-decoration: none;
+  
+  color:#ec694d;
+  
+}
+#deco-4{
+  font-size:300px;
+  font-family: "Wimple STENCIL DECO 004";
+  text-decoration: none;
+  
+  color:#ec694d;
+
+}
+
+#deco-5{
+  font-size:300px;
+  font-family: "Wimple STENCIL DECO 005";
+  text-decoration: none;
+  
+  color:#ec694d;
+  
+}
+
+#deco-5{
+  font-size:300px;
+  font-family: "Wimple STENCIL FRAME";
+  text-decoration: none;
+ 
+  color:#ec694d;
+  
+
+}
+
+#deco-frame{
+  font-size:300px;
+  margin-left:20px;
+  font-family: "Wimple STENCIL DECO FRAME";
+  text-decoration: none;
+  /* bottom: -70px; */
+  color:#ec694d;
+
+}
+
+
+#randomColorButton{
+  
+  cursor: pointer;
+  position: relative;
+  line-height: 0;
+  font-size: 8vh;
+  bottom: 3px; 
+  border: none;
+
+  margin-left: 10px ;
+ 
 }
 
 body.wimple-stencil .decocontainer {
@@ -404,11 +495,13 @@ body.wimple-stencil .decocontainer {
 }
 
 .columns-2 {
-margin-left: 150px;
-margin-right: 150px;
+  width:100%;
+margin-left: 10px;
+margin-right: 10px;
 display: block;
 overflow: auto;
 position: relative;
+overflow:scroll;
 }
 
 .button {
@@ -416,8 +509,8 @@ color: #000;
 text-align: center;
 background-color: rgba(0, 0, 0, 0);
 flex: 1;
-font-size: 50px;
-line-height: 24px;
+font-size: 10vh;
+line-height: 1vh;
 }
 
 .button:hover {
@@ -443,7 +536,15 @@ display: block;
   
   
   .buttonscontainer {
-   padding-top: 140px;
+
+    
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
   height: auto;
   position: fixed;
   top: 0;
@@ -452,7 +553,7 @@ display: block;
   flex-direction: row;
   align-items: stretch;
   justify-content: space-evenly;
-  width: 50px;
+  width: 2vh;
   flex-wrap: wrap;
   align-content: space-around;
 }
@@ -460,7 +561,8 @@ display: block;
   .button {
     cursor: pointer;
     position: relative;
-    line-height: 200%;
+    line-height: 10vh;
+    font-size: 8vh;
   }
   
   
@@ -503,7 +605,7 @@ rgba(0,0,0,0) 0px, rgba(0,0,0,0) 25px);
     height: 28px;
     background-color: #555;
     position: absolute;
-    top: calc( 100% - 28px );
+    top: 50%;
     left: -10px;
     transform: translateY(-50%);
     border-radius: 21px;

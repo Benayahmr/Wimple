@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Wimple</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image" href="favicon.png">
-</head>  
+    <head>
+        
+        <title>WIMPLE ✦ SPECIMEN</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/x-icon" href="favicon.png">
+      </head>  
+
+
 <body>
   <div class="fontcontainer">
     <div class="columns-2 w-row">
  
-
         <textarea class="textinput w-input" name="field" data-name="Field" placeholder="מוזמנים.ות לנסות כאן!" id="field" required=""></textarea>
-<textarea class="textinput w-input shadowinput" id="shadowfield"></textarea>
-<textarea class="textinput w-input shadowinput frame-input" id="frameShadowField"></textarea>
-
+        <textarea class="textinput w-input shadowinput" id="shadowfield"></textarea>
       </div>
       <div class="w-col w-col-1">
         <div class="slider-column">
           <div class="slider-container">
             <div class="slider-track">
               <div class="slider-thumb"></div>
-            </div>
-          
+            </div>          
         </div>
       </div>
+
+
       <div class="w-col w-col-2">
         <div class="buttonscontainer">
           <a href="#" class="button button-light w-button">מ</a>
@@ -41,119 +42,31 @@
   </div>
 
   <div class="decocontainer">
-    <!-- <a href="#" class="button" id="deco-1">ו</a>
-    <a href="#" class="button"id="deco-2">ו</a>
-    <a href="#" class="button"id="deco-3">ו</a>
-    <a href="#" class="button"id="deco-4">ו</a>
-    <a href="#" class="button"id="deco-5">ו</a> -->
-    
-    <a href="#" class="button"><img src=deco001.svg width="34" height="34"></a>
-    <space>&nbsp&nbsp&nbsp&nbsp</space>
-    <a href="#" class="button"><img src=deco002.svg width="34" height="34"></a>
-    <space>&nbsp&nbsp&nbsp&nbsp</space>
-    <a href="#" class="button"><img src=deco003.svg width="34" height="34"></a>
-    <space>&nbsp&nbsp&nbsp&nbsp</space>
-    <a href="#" class="button"><img src=deco004.svg width="34" height="34"></a>
-    <space>&nbsp&nbsp&nbsp&nbsp</space>
-    <a href="#" class="button"><img src=deco005.svg width="34" height="34"></a>
-    <space>&nbsp&nbsp&nbsp&nbsp</space>
-    <a href="#" class="button"id="deco-frame"><img src=frame.svg width="34" height="34"></a>
-    <space>&nbsp&nbsp&nbsp&nbsp</space>
-    
-     <button class="button" id="randomColorButton"><img src=colors.png width="30" height="30"></button>
+    <a href="#" class="button">1</a>
+    <a href="#" class="button">2</a>
+    <a href="#" class="button">3</a>
+    <a href="#" class="button">4</a>
+    <a href="#" class="button">5</a>
+    <a href="#" class="button">6</a>
   </div>
 
 
-
-
-
-
-
-
-
-
-
-  
   <script>
+    // Get references to the buttons, text input, slider track, and slider thumb
+    const buttons = document.querySelectorAll('.buttonscontainer .button');
+    const decoButtons = document.querySelectorAll('.decocontainer .button');
+    const textInput = document.querySelector('.textinput');
+    const shadowInput = document.querySelector('.shadowinput');
+    const sliderTrack = document.querySelector('.slider-track');
+    const sliderThumb = document.querySelector('.slider-thumb');
 
-
-// Get references to the buttons, text input, slider track, and slider thumb
-const buttons = document.querySelectorAll('.buttonscontainer .button');
-const decoButtons = document.querySelectorAll('.decocontainer .button');
-const textInput = document.querySelector('.textinput');
-const shadowInput = document.querySelector('.shadowinput');
-const frameShadowInput = document.querySelector('.frame-input');
-const sliderTrack = document.querySelector('.slider-track');
-const sliderThumb = document.querySelector('.slider-thumb');
-let activeDecos = []; // Track the active decorations
-
-// Add click event listeners to the buttons
-buttons.forEach((button, index) => {
-  button.addEventListener('click', (e) => {
-    e.preventDefault();
-    changeFont(index);
-    // Change font color to #ec694d
-    button.style.color = '#ec694d';
-
-    // Reset font color of other buttons
-    buttons.forEach((otherButton, otherIndex) => {
-      if (otherIndex !== index) {
-        otherButton.style.color = '';
-      }
+    // Add click event listeners to the buttons
+    buttons.forEach((button, index) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        changeFont(index);
+      });
     });
-
-    // Reset font color of text input and shadow input
-    textInput.style.color = '';
-    shadowInput.style.color = '';
-    frameShadowInput.style.color = activeDecos.includes('wimple-frame') ? '#ec694d' : '';
-  });
-});
-
-decoButtons.forEach((button, index) => {
-  button.addEventListener('click', (e) => {
-    e.preventDefault();
-    toggleDeco(index);
-    // Change font color to #ec694d
-    button.style.color = '#ec694d';
-
-    // Reset font color of other buttons
-    decoButtons.forEach((otherButton, otherIndex) => {
-      if (otherIndex !== index) {
-        otherButton.style.color = '';
-      }
-    });
-  });
-});
-
-function toggleDeco(index) {
-  const currentDeco = decoButtons[index].classList[1];
-
-  if (currentDeco === 'button-heavy') {
-    const frameIndex = activeDecos.indexOf('wimple-frame');
-    if (frameIndex !== -1) {
-      activeDecos.splice(frameIndex, 1);
-    } else {
-      activeDecos.push('wimple-frame');
-    }
-  } else {
-    const decoIndex = activeDecos.indexOf(currentDeco);
-    if (decoIndex !== -1) {
-      activeDecos.splice(decoIndex, 1);
-    } else {
-      activeDecos.push(currentDeco);
-    }
-  }
-
-  const fontContainer = document.querySelector('.fontcontainer');
-  fontContainer.className = 'fontcontainer ' + activeDecos.join(' ');
-  frameShadowInput.style.color = activeDecos.includes('wimple-frame') ? '#ec694d' : '';
-}
-
-
-
-
-
-
 
     decoButtons.forEach((button, index) => {
       button.addEventListener('click', (e) => {
@@ -177,8 +90,7 @@ function toggleDeco(index) {
       'wimple-deco-002',
       'wimple-deco-003',
       'wimple-deco-004',
-      'wimple-deco-005',
-      'wimple-frame'
+      'wimple-deco-005'
     ];
 
     // Function to change the font of the text input
@@ -250,7 +162,7 @@ function toggleDeco(index) {
       const newPos = thumbStartPos + delta;
       
       const minPos = 0;
-      const maxPos = sliderTrack.clientHeight - sliderThumb.clientHeight+20;
+      const maxPos = sliderTrack.clientHeight - sliderThumb.clientHeight;
       
       const clampedPos = Math.min(Math.max(newPos, minPos), maxPos);
       
@@ -278,41 +190,6 @@ function toggleDeco(index) {
     document.getElementById( "field" ).addEventListener( "input", e => {
       shadowfield.value = e.currentTarget.value;
     } );
-
-
-
-
-textInput.addEventListener('scroll', () => {
-  const scrollPercentage = textInput.scrollTop / (textInput.scrollHeight - textInput.clientHeight);
-  const shadowScrollTop = scrollPercentage * (shadowInput.scrollHeight - shadowInput.clientHeight);
-  shadowInput.scrollTop = shadowScrollTop;
-});
-
-
-
-
-const randomColorButton = document.getElementById("randomColorButton");
-
-randomColorButton.addEventListener("click", () => {
-  const inputColor = getRandomColor();
-  const shadowColor = getRandomColor();
-  textInput.style.color = inputColor;
-  shadowInput.style.color = shadowColor;
-});
-
-function getRandomColor() {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
-
-
-
-    
   </script>
 </body>
 </html>
