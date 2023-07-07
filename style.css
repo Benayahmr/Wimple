@@ -350,21 +350,22 @@ body.wimple-stencil .textinput {
   font-family: "Wimple STENCIL";
 }
 
-.textinput.shadowinput {
+.textinput.shadowinput,
+.textinput.frame-input {
   position: absolute;
   top: 0; left: 150px;
   background: transparent;
   pointer-events: none;
 }
 
-
-
-
-
 body.wimple-light .textinput.shadowinput,
 body.wimple-regular .textinput.shadowinput,
 body.wimple-bold .textinput.shadowinput,
-body.wimple-heavy .textinput.shadowinput {
+body.wimple-heavy .textinput.shadowinput,
+body.wimple-light .textinput.frame-input,
+body.wimple-regular .textinput.frame-input,
+body.wimple-bold .textinput.frame-input,
+body.wimple-heavy .textinput.frame-input {
   color: transparent;
 }
 
@@ -394,8 +395,9 @@ body.wimple-stencil .fontcontainer.wimple-deco-005 .textinput.shadowinput {
   font-family: "Wimple STENCIL DECO 005";
 }
 
-body.wimple-stencil .fontcontainer.wimple-frame .textinput.shadowinput {
+body.wimple-stencil .textinput.frame-input.active {
   font-family: "Wimple STENCIL DECO FRAME";
+  color:#1b7262;
 }
 
 
@@ -637,5 +639,9 @@ rgba(0,0,0,0) 0px, rgba(0,0,0,0) 25px);
 
   display: none;
 
+}
+
+.frame-input.active {
+  display: block;
 }
 

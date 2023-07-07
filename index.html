@@ -11,8 +11,8 @@
  
 
         <textarea class="textinput w-input" name="field" data-name="Field" placeholder="מוזמנים.ות לנסות כאן!" id="field" required=""></textarea>
-<textarea class="textinput w-input shadowinput" id="shadowfield"></textarea>
-<textarea class="textinput w-input shadowinput frame-input" id="frameShadowField"></textarea>
+        <textarea class="textinput w-input frame-input" id="frameShadowField"></textarea>
+        <textarea class="textinput w-input shadowinput" id="shadowfield"></textarea>
 
       </div>
       <div class="w-col w-col-1">
@@ -57,7 +57,7 @@
     <space>&nbsp&nbsp&nbsp&nbsp</space>
     <a href="#" class="button"><img src=deco005.svg width="34" height="34"></a>
     <space>&nbsp&nbsp&nbsp&nbsp</space>
-    <a href="#" class="button"id="deco-frame"><img src=frame.svg width="34" height="34"></a>
+    <a href="#" class="button" id="deco-frame"><img src=frame.svg width="34" height="34"></a>
     <space>&nbsp&nbsp&nbsp&nbsp</space>
     
      <button class="button" id="randomColorButton"><img src=colors.png width="30" height="30"></button>
@@ -151,7 +151,14 @@ buttons.forEach((button, index) => {
 decoButtons.forEach((button, index) => {
   button.addEventListener('click', (e) => {
     e.preventDefault();
-    toggleDeco(index);
+
+    if (e.currentTarget.id === "deco-frame" ) {
+      frameShadowInput.classList.toggle( "active" );
+      return;
+    }
+
+    changeDeco(index);
+    // toggleDeco(index);
     // Change font color to #ec694d
     button.style.color = '#ec694d';
 
@@ -194,12 +201,12 @@ function toggleDeco(index) {
 
 
 
-    decoButtons.forEach((button, index) => {
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-        changeDeco(index);
-      });
-    });
+    // decoButtons.forEach((button, index) => {
+    //   button.addEventListener('click', (e) => {
+    //     e.preventDefault();
+    //     changeDeco(index);
+    //   });
+    // });
 
 
     // Define the font names corresponding to each button
@@ -298,6 +305,7 @@ function toggleDeco(index) {
       const value = mapRange(clampedPos, minPos, maxPos, 400, 40);
       textInput.style.fontSize = value + 'px';
       shadowInput.style.fontSize = value + 'px';
+      frameShadowInput.style.fontSize = value + 'px';
     }
     
     function stopDrag() {
@@ -316,6 +324,7 @@ function toggleDeco(index) {
     const shadowfield = document.getElementById( "shadowfield" );
     document.getElementById( "field" ).addEventListener( "input", e => {
       shadowfield.value = e.currentTarget.value;
+      frameShadowInput.value = e.currentTarget.value;
     } );
 
 
@@ -337,6 +346,7 @@ randomColorButton.addEventListener("click", () => {
   const shadowColor = getRandomColor();
   textInput.style.color = inputColor;
   shadowInput.style.color = shadowColor;
+  frameShadowInput.style.color = shadowColor;
 });
 
 function getRandomColor() {
