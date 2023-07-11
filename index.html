@@ -330,11 +330,15 @@ function toggleDeco(index) {
 
 
 
+
+
 textInput.addEventListener('scroll', () => {
   const scrollPercentage = textInput.scrollTop / (textInput.scrollHeight - textInput.clientHeight);
   const shadowScrollTop = scrollPercentage * (shadowInput.scrollHeight - shadowInput.clientHeight);
   shadowInput.scrollTop = shadowScrollTop;
+  frameShadowInput.scrollTop = shadowScrollTop;
 });
+
 
 
 
