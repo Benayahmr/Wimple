@@ -328,6 +328,8 @@ border: 1px solid rgba(0, 0, 0, 0);
 padding: 5px;
 font-family: Wimple REGULAR, sans-serif;
 font-size: 150px;
+
+    resize: none;
 }
 
 body.wimple-light .textinput {
