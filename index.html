@@ -47,20 +47,29 @@
     <a href="#" class="button"id="deco-4">ו</a>
     <a href="#" class="button"id="deco-5">ו</a> -->
     
-    <a href="#" class="button"><img src=deco001.svg width="34" height="34"></a>
+    <a href="#" class="button" id="deco-1"><img src=deco001-on.svg width="34" height="34"></a>
     <space>&nbsp&nbsp&nbsp&nbsp</space>
-    <a href="#" class="button"><img src=deco002.svg width="34" height="34"></a>
+    <a href="#" class="button"id="deco-2"><img src=deco002.svg width="34" height="34"></a>
     <space>&nbsp&nbsp&nbsp&nbsp</space>
-    <a href="#" class="button"><img src=deco003.svg width="34" height="34"></a>
+    <a href="#" class="button"id="deco-3"><img src=deco003.svg width="34" height="34"></a>
     <space>&nbsp&nbsp&nbsp&nbsp</space>
-    <a href="#" class="button"><img src=deco004.svg width="34" height="34"></a>
+    <a href="#" class="button"id="deco-4"><img src=deco004.svg width="34" height="34"></a>
     <space>&nbsp&nbsp&nbsp&nbsp</space>
-    <a href="#" class="button"><img src=deco005.svg width="34" height="34"></a>
-    <space>&nbsp&nbsp&nbsp&nbsp</space>
-    <a href="#" class="button" id="deco-frame"><img src=frame.svg width="34" height="34"></a>
-    <space>&nbsp&nbsp&nbsp&nbsp</space>
+    <a href="#" class="button"id="deco-5"><img src=deco005.svg width="34" height="34"></a>
+
+    <space>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</space>
+    <a href="#" class="button" id="deco-frame" onclick="frametog()"><img src=frame.svg width="34" height="34"></a>
+
+    <space>&nbsp&nbsp</space>
     
      <button class="button" id="randomColorButton"><img src=colors.png width="30" height="30"></button>
+
+
+
+
+
+
+     
   </div>
 
 
@@ -90,32 +99,10 @@ let activeDecos = []; // Track the active decorations
 
 
 let frameButtonActive = false;
+let frameButtonTog=true
+let lastDeco = null;
 
 
-
-function toggleDeco(index) {
-  if (index === decoButtons.length - 1) {
-    // Toggle the state of the frame button
-    frameButtonActive = !frameButtonActive;
-    frameShadowInput.style.display = frameButtonActive ? 'block' : 'none';
-    return;
-  }
-
-  
-  // Handle other deco buttons
-  const currentDeco = decoButtons[index].classList[1];
-
-  const decoIndex = activeDecos.indexOf(currentDeco);
-  if (decoIndex !== -1) {
-    activeDecos.splice(decoIndex, 1);
-  } else {
-    activeDecos.push(currentDeco);
-  }
-
-  const fontContainer = document.querySelector('.fontcontainer');
-  fontContainer.className = 'fontcontainer ' + activeDecos.join(' ');
-  frameShadowInput.style.color = frameButtonActive ? '#ec694d' : '';
-}
 
 
 
@@ -139,6 +126,7 @@ buttons.forEach((button, index) => {
       if (otherIndex !== index) {
         otherButton.style.color = '';
       }
+      
     });
 
     // Reset font color of text input and shadow input
@@ -146,16 +134,29 @@ buttons.forEach((button, index) => {
     shadowInput.style.color = '';
     frameShadowInput.style.color = activeDecos.includes('wimple-frame') ? '#ec694d' : '';
   });
+
+
 });
+
+
+function frametog(){
+  frameButtonTog=!frameButtonTog
+
+ if(!frameButtonTog) { document.getElementById('deco-frame').getElementsByTagName('img')[0].src = 'frame-on.svg';}
+else  { document.getElementById('deco-frame').getElementsByTagName('img')[0].src = 'frame.svg';}
+}
+
 
 decoButtons.forEach((button, index) => {
   button.addEventListener('click', (e) => {
     e.preventDefault();
 
-    if (e.currentTarget.id === "deco-frame" ) {
-      frameShadowInput.classList.toggle( "active" );
+    if (e.currentTarget.id === "deco-frame") {
+      frameShadowInput.classList.toggle( "active" );           
       return;
     }
+    
+   
 
     changeDeco(index);
     // toggleDeco(index);
@@ -191,6 +192,7 @@ function toggleDeco(index) {
   }
 
   const fontContainer = document.querySelector('.fontcontainer');
+ 
   fontContainer.className = 'fontcontainer ' + activeDecos.join(' ');
   frameShadowInput.style.color = activeDecos.includes('wimple-frame') ? '#ec694d' : '';
 }
@@ -243,8 +245,70 @@ function toggleDeco(index) {
 
     function changeDeco(index) {
       document.querySelector( ".fontcontainer" ).className = "fontcontainer " + decoNames[ index ];
-      // textInput.style.fontFamily = fontNames[index];
-      
+     
+            
+            const newDeco = decoNames[index];
+
+      // Remove the last deco class from the shadowInput and frameShadowInput
+      if (lastDeco) {
+        shadowInput.classList.remove(lastDeco);
+        frameShadowInput.classList.remove(lastDeco);
+      }
+
+      // Apply the new deco class to the shadowInput and frameShadowInput
+      if (newDeco) {
+        shadowInput.classList.add(newDeco);
+        frameShadowInput.classList.add(newDeco);
+      }
+
+      // Update the lastDeco variable
+      lastDeco = newDeco;
+
+
+
+      if (index==0 ){
+      document.getElementById('deco-1').getElementsByTagName('img')[0].src = 'deco001-on.svg';
+            
+        document.getElementById('deco-2').getElementsByTagName('img')[0].src = 'deco002.svg';
+        document.getElementById('deco-3').getElementsByTagName('img')[0].src  = 'deco003.svg';
+        document.getElementById('deco-4').getElementsByTagName('img')[0].src  = 'deco004.svg';
+        document.getElementById('deco-5').getElementsByTagName('img')[0].src  = 'deco005.svg';
+
+      }
+
+      if (index==1){
+        document.getElementById('deco-2').getElementsByTagName('img')[0].src = 'deco002-on.svg';
+            
+            document.getElementById('deco-1').getElementsByTagName('img')[0].src = 'deco001.svg';
+            document.getElementById('deco-3').getElementsByTagName('img')[0].src  = 'deco003.svg';
+            document.getElementById('deco-4').getElementsByTagName('img')[0].src  = 'deco004.svg';
+            document.getElementById('deco-5').getElementsByTagName('img')[0].src  = 'deco005.svg';
+      }
+      if (index==2){
+        document.getElementById('deco-3').getElementsByTagName('img')[0].src = 'deco003-on.svg';
+            
+            document.getElementById('deco-1').getElementsByTagName('img')[0].src = 'deco001.svg';
+            document.getElementById('deco-2').getElementsByTagName('img')[0].src  = 'deco002.svg';
+            document.getElementById('deco-4').getElementsByTagName('img')[0].src  = 'deco004.svg';
+            document.getElementById('deco-5').getElementsByTagName('img')[0].src  = 'deco005.svg';
+      }
+      if (index==3){
+        document.getElementById('deco-4').getElementsByTagName('img')[0].src = 'deco004-on.svg';
+            
+            document.getElementById('deco-1').getElementsByTagName('img')[0].src = 'deco001.svg';
+            document.getElementById('deco-3').getElementsByTagName('img')[0].src  = 'deco003.svg';
+            document.getElementById('deco-2').getElementsByTagName('img')[0].src  = 'deco002.svg';
+            document.getElementById('deco-5').getElementsByTagName('img')[0].src  = 'deco005.svg';
+      }
+      if (index==4){
+        document.getElementById('deco-5').getElementsByTagName('img')[0].src = 'deco005-on.svg';
+            
+            document.getElementById('deco-1').getElementsByTagName('img')[0].src = 'deco001.svg';
+            document.getElementById('deco-3').getElementsByTagName('img')[0].src  = 'deco003.svg';
+            document.getElementById('deco-4').getElementsByTagName('img')[0].src  = 'deco004.svg';
+            document.getElementById('deco-2').getElementsByTagName('img')[0].src  = 'deco002.svg';
+      }
+
       // Remove the 'active' class from all buttons
       decoButtons.forEach(button => {
         button.classList.remove('active');
@@ -252,6 +316,9 @@ function toggleDeco(index) {
       
       // Add the 'active' class to the clicked button
       decoButtons[index].classList.add('active');
+
+
+      
     }
 
     // Vertical Slider functionality
@@ -351,6 +418,21 @@ randomColorButton.addEventListener("click", () => {
   textInput.style.color = inputColor;
   shadowInput.style.color = shadowColor;
   frameShadowInput.style.color = shadowColor;
+
+  // Apply the last deco to the shadowInput
+  if (lastDeco) {
+    shadowInput.classList.add(lastDeco);
+    frameShadowInput.classList.add(lastDeco);
+  }
+
+
+  document.getElementById('deco-1').getElementsByTagName('img')[0].src = 'deco001-on.svg';
+            
+        document.getElementById('deco-2').getElementsByTagName('img')[0].src = 'deco002.svg';
+        document.getElementById('deco-3').getElementsByTagName('img')[0].src  = 'deco003.svg';
+        document.getElementById('deco-4').getElementsByTagName('img')[0].src  = 'deco004.svg';
+        document.getElementById('deco-5').getElementsByTagName('img')[0].src  = 'deco005.svg';
+
 });
 
 function getRandomColor() {
@@ -363,6 +445,14 @@ function getRandomColor() {
 }
 
 
+
+
+
+
+
+
+
+  
 
 
     
